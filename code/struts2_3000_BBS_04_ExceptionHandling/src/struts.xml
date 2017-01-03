@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+
+	<package name="admin" strict-method-invocation="false" namespace="/admin" extends="struts-default">
+		<!-- 下面第一个action是专门为处理default-action而定义的，这个标签里指定的action不能使用通配符 -->
+		<default-action-ref name="category"></default-action-ref>
+	
+		<global-results>
+    		<result name="error">/error.jsp</result>
+    	</global-results>
+		<global-exception-mappings>
+    		<exception-mapping result="error" exception="java.lang.Exception">
+    			/error.jsp
+    		</exception-mapping>
+    	</global-exception-mappings>
+	
+		<action name="category" class="com.ace.bbs.action.CategoryAction" method="list">
+			<result>/admin/category_list.jsp</result>
+		</action>
+		
+		<action name="category_*" class="com.ace.bbs.action.CategoryAction" method="{1}">
+			<result>/admin/category_list.jsp</result>
+			<result name="update_input">/admin/category_update.jsp</result>
+			<result name="{1}_success">/admin/category_{1}_success.jsp</result>
+		</action>
+		
+		
+		
+	</package>
+
+
+
+</struts>
