@@ -1,1 +1,5 @@
 Struts2.zip
+.settings
+.classpath
+.project
+.tern-project
